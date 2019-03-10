@@ -1,6 +1,8 @@
 <?php
 
 use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
 
 class CreateRevisionsTable extends Migration
 {
@@ -9,9 +11,9 @@ class CreateRevisionsTable extends Migration
      *
      * @return void
      */
-    public function up()
+    public function up(): void
     {
-        Schema::create('revisions', function ($table) {
+        Schema::create('revisions', function(Blueprint $table) {
             $table->increments('id');
             $table->string('revisionable_type');
             $table->integer('revisionable_id');
@@ -21,7 +23,7 @@ class CreateRevisionsTable extends Migration
             $table->text('new_value')->nullable();
             $table->timestamps();
 
-            $table->index(array('revisionable_id', 'revisionable_type'));
+            $table->index(['revisionable_id', 'revisionable_type']);
         });
     }
 
@@ -30,7 +32,7 @@ class CreateRevisionsTable extends Migration
      *
      * @return void
      */
-    public function down()
+    public function down(): void
     {
         Schema::drop('revisions');
     }

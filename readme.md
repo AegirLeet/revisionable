@@ -1,10 +1,4 @@
-<img src="http://venturecraft.com.au/wp-content/uploads/2015/09/REVISIONABLE.png" style="width: 100%" alt="Revisionable" />
-
-[![Laravel 4.x](https://img.shields.io/badge/Laravel-4.x-brightgreen.svg?style=flat-square)](http://laravel.com)
-[![Laravel 5.2](https://img.shields.io/badge/Laravel-5.x-brightgreen.svg?style=flat-square)](http://laravel.com)
-[![Latest Version](https://img.shields.io/github/release/venturecraft/revisionable.svg?style=flat-square)](https://packagist.org/packages/venturecraft/revisionable)
-[![Downloads](https://img.shields.io/packagist/dt/venturecraft/revisionable.svg?style=flat-square)](https://packagist.org/packages/venturecraft/revisionable)
-[![License](http://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square)](https://tldrlegal.com/license/mit-license)
+# Laravel 5 Revisionable
 
 Wouldn't it be nice to have a revision history for any model in your project, without having to do any work for it. By simply extending revisionable from your model, you can instantly have just that, and be able to display a history similar to this:
 
@@ -26,12 +20,12 @@ Revisionable can also now be used [as a trait](#the-new-trait-based-implementati
 
 ## Installation
 
-Revisionable is installable via [composer](http://getcomposer.org/doc/00-intro.md), the details are on [packagist, here.](https://packagist.org/packages/venturecraft/revisionable)
+Revisionable is installable via [composer](http://getcomposer.org/doc/00-intro.md), the details are on [packagist, here.](https://packagist.org/packages/aegirleet/revisionable)
 
 Add the following to the `require` section of your projects composer.json file:
 
 ```php
-"venturecraft/revisionable": "1.*",
+"aegirleet/revisionable": "2.*",
 ```
 
 Run composer update to download the package
@@ -43,17 +37,12 @@ php composer.phar update
 Finally, you'll also need to run migration on the package (Laravel 5.x)
 
 ```
-php artisan migrate --path=vendor/venturecraft/revisionable/src/migrations
-```
-
-For Laravel 4.x users:
-```
-php artisan migrate --package=venturecraft/revisionable
+php artisan migrate --path=vendor/aegirleet/revisionable/src/migrations
 ```
 
 > If you're going to be migrating up and down completely a lot (using `migrate:refresh`), one thing you can do instead is to copy the migration file from the package to your `app/database` folder, and change the classname from `CreateRevisionsTable` to something like `CreateRevisionTable` (without the 's', otherwise you'll get an error saying there's a duplicate class)
 
-> `cp vendor/venturecraft/revisionable/src/migrations/2013_04_09_062329_create_revisions_table.php app/database/migrations/`
+> `cp vendor/aegirleet/revisionable/src/migrations/2013_04_09_062329_create_revisions_table.php app/database/migrations/`
 
 ## Docs
 
@@ -77,7 +66,7 @@ If you are using another bootable trait the be sure to override the boot method 
 namespace MyApp\Models;
 
 class Article extends Eloquent {
-    use \Venturecraft\Revisionable\RevisionableTrait;
+    use \AegirLeet\Revisionable\RevisionableTrait;
 
     public static function boot()
     {
@@ -97,7 +86,7 @@ class Article extends Eloquent {
 For any model that you want to keep a revision history for, include the revisionable namespace and extend revisionable instead of eloquent, e.g.,
 
 ```php
-use Venturecraft\Revisionable\Revisionable;
+use AegirLeet\Revisionable\Revisionable;
 
 namespace MyApp\Models;
 
@@ -114,7 +103,7 @@ If needed, you can disable the revisioning by setting `$revisionEnabled` to fals
 namespace MyApp\Models;
 
 class Article extends Eloquent {
-    use Venturecraft\Revisionable\RevisionableTrait;
+    use AegirLeet\Revisionable\RevisionableTrait;
 
     protected $revisionEnabled = false;
 }
@@ -126,7 +115,7 @@ You can also disable revisioning after X many revisions have been made by settin
 namespace MyApp\Models;
 
 class Article extends Eloquent {
-    use Venturecraft\Revisionable\RevisionableTrait;
+    use AegirLeet\Revisionable\RevisionableTrait;
 
     protected $revisionEnabled = true;
     protected $historyLimit = 500; //Stop tracking revisions after 500 changes have been made.
@@ -138,7 +127,7 @@ In order to maintain a limit on history, but instead of stopping tracking revisi
 namespace MyApp\Models;
 
 class Article extends Eloquent {
-    use Venturecraft\Revisionable\RevisionableTrait;
+    use AegirLeet\Revisionable\RevisionableTrait;
 
     protected $revisionEnabled = true;
     protected $revisionCleanup = true; //Remove old revisions (works only when used with $historyLimit)
@@ -323,7 +312,7 @@ This is used when the value (old or new) is the id of a foreign key relationship
 By default, it simply returns the ID of the model that was updated. It is up to you to override this method in your own models to return something meaningful. e.g.,
 
 ```php
-use Venturecraft\Revisionable\Revisionable;
+use AegirLeet\Revisionable\Revisionable;
 
 class Article extends Revisionable
 {
@@ -363,7 +352,7 @@ $object->disableRevisionField(array('title', 'content')); // Disables title and 
 ## Contributing
 
 Contributions are encouraged and welcome; to keep things organised, all bugs and requests should be
-opened in the GitHub issues tab for the main project, at [venturecraft/revisionable/issues](https://github.com/venturecraft/revisionable/issues)
+opened in the GitHub issues tab for the main project, at [AegirLeet/revisionable/issues](https://github.com/AegirLeet/revisionable/issues)
 
 All pull requests should be made to the develop branch, so they can be tested before being merged into the master branch.
 
@@ -373,6 +362,6 @@ All pull requests should be made to the develop branch, so they can be tested be
 If you're having troubles with using this package, odds on someone else has already had the same problem. Two places you can look for common answers to your problems are:
 
 * [StackOverflow revisionable tag](http://stackoverflow.com/questions/tagged/revisionable?sort=newest&pageSize=50)
-* [GitHub Issues](https://github.com/VentureCraft/revisionable/issues?page=1&state=closed)
+* [GitHub Issues](https://github.com/AegirLeet/revisionable/issues?page=1&state=closed)
 
 > If you do prefer posting your questions to the public on StackOverflow, please use the 'revisionable' tag.

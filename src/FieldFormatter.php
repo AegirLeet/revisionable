@@ -1,6 +1,6 @@
 <?php
 
-namespace Venturecraft\Revisionable;
+namespace AegirLeet\Revisionable;
 
 /**
  * FieldFormatter.
@@ -12,7 +12,7 @@ namespace Venturecraft\Revisionable;
 
 /**
  * Class FieldFormatter
- * @package Venturecraft\Revisionable
+ * @package AegirLeet\Revisionable
  */
 class FieldFormatter
 {
@@ -28,16 +28,16 @@ class FieldFormatter
     public static function format($key, $value, $formats)
     {
         foreach ($formats as $pkey => $format) {
-            $parts = explode(':', $format);
-            if (sizeof($parts) === 1) {
+            $parts = \explode(':', $format);
+            if (\count($parts) === 1) {
                 continue;
             }
 
-            if ($pkey == $key) {
-                $method = array_shift($parts);
+            if ($pkey === $key) {
+                $method = \array_shift($parts);
 
-                if (method_exists(get_class(), $method)) {
-                    return self::$method($value, implode(':', $parts));
+                if (\method_exists(static::class, $method)) {
+                    return self::$method($value, \implode(':', $parts));
                 }
                 break;
             }
@@ -49,16 +49,16 @@ class FieldFormatter
     /**
      * Check if a field is empty.
      *
-     * @param $value
+     * @param       $value
      * @param array $options
      *
      * @return string
      */
-    public static function isEmpty($value, $options = array())
+    public static function isEmpty($value, $options = [])
     {
-        $value_set = isset($value) && $value != '';
+        $value_set = isset($value) && $value !== '';
 
-        return sprintf(self::boolean($value_set, $options), $value);
+        return \sprintf(self::boolean($value_set, $options), $value);
     }
 
     /**
@@ -71,12 +71,12 @@ class FieldFormatter
      */
     public static function boolean($value, $options = null)
     {
-        if (!is_null($options)) {
-            $options = explode('|', $options);
+        if ($options !== null) {
+            $options = \explode('|', $options);
         }
 
-        if (sizeof($options) != 2) {
-            $options = array('No', 'Yes');
+        if (\count($options) !== 2) {
+            $options = ['No', 'Yes'];
         }
 
         return $options[!!$value];
@@ -88,31 +88,32 @@ class FieldFormatter
      * @param  $value
      * @param  $format
      *
-     * @return formatted string
+     * @return string formatted string
      */
     public static function string($value, $format = null)
     {
-        if (is_null($format)) {
+        if ($format === null) {
             $format = '%s';
         }
 
-        return sprintf($format, $value);
+        return \sprintf($format, $value);
     }
-    
+
     /**
      * Format the datetime
      *
      * @param string $value
      * @param string $format
      *
-     * @return formatted datetime
+     * @return string formatted datetime
+     * @throws \Exception
      */
     public static function datetime($value, $format = 'Y-m-d H:i:s')
     {
         if (empty($value)) {
-            return null;    
+            return null;
         }
-        
+
         $datetime = new \DateTime($value);
 
         return $datetime->format($format);

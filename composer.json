@@ -1,38 +1,50 @@
 {
-    "name": "venturecraft/revisionable",
+    "name": "aegirleet/revisionable",
     "license": "MIT",
     "description": "Keep a revision history for your models without thinking, created as a package for use with Laravel",
-    "keywords": ["model", "laravel", "ardent", "revision", "history"],
-    "homepage": "http://github.com/venturecraft/revisionable",
+    "keywords": [
+        "model",
+        "laravel",
+        "ardent",
+        "revision",
+        "history"
+    ],
+    "homepage": "http://github.com/AegirLeet/revisionable",
     "authors": [
         {
             "name": "Chris Duell",
-            "email": "me@chrisduell.com"
+            "email": "me@chrisduell.com",
+            "role": "Original author"
+        },
+        {
+            "name": "AegirLeet",
+            "email": "aegir@aegir.sexy",
+            "role": "Current maintainer"
         }
     ],
-    "abandoned": true,
     "support": {
-        "issues": "https://github.com/VentureCraft/revisionable/issues",
-        "source": "https://github.com/VentureCraft/revisionable"
+        "issues": "https://github.com/AegirLeet/revisionable/issues",
+        "source": "https://github.com/AegirLeet/revisionable"
     },
     "require": {
-        "php": ">=5.3.0",
-        "illuminate/support": "~4.0|~5.0|~5.1"
+        "php": ">=7.1.3",
+        "illuminate/support": "~5.0"
     },
     "autoload": {
         "classmap": [
             "src/migrations"
         ],
-        "psr-0": {
-            "Venturecraft\\Revisionable": "src/"
+        "psr-4": {
+            "AegirLeet\\Revisionable\\": "src/"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "Venturecraft\\Revisionable\\Tests\\": "tests/"
+            "AegirLeet\\Revisionable\\Tests\\": "tests/"
         }
     },
     "require-dev": {
-        "orchestra/testbench": "~3.0"
+        "orchestra/testbench": "~3.0",
+        "roave/security-advisories": "dev-master"
     }
 }

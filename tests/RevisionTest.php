@@ -1,15 +1,16 @@
 <?php
 
-namespace Venturecraft\Revisionable\Tests;
+namespace AegirLeet\Revisionable\Tests;
 
-use Venturecraft\Revisionable\Tests\Models\User;
+use Illuminate\Support\Facades\Hash;
+use AegirLeet\Revisionable\Tests\Models\User;
 
 class RevisionTest extends \Orchestra\Testbench\TestCase
 {
     /**
      * Setup the test environment.
      */
-    protected function setUp()
+    protected function setUp(): void
     {
         parent::setUp();
         $this->loadLaravelMigrations(['--database' => 'testing']);
@@ -18,7 +19,7 @@ class RevisionTest extends \Orchestra\Testbench\TestCase
         // the path option should be an absolute path.
         $this->loadMigrationsFrom([
             '--database' => 'testing',
-            '--path' => realpath(__DIR__.'/../src/migrations'),
+            '--path' => \realpath(__DIR__.'/../src/migrations'),
         ]);
     }
 
@@ -47,12 +48,12 @@ class RevisionTest extends \Orchestra\Testbench\TestCase
         User::create([
             'name' => 'James Judd',
             'email' => 'james.judd@revisionable.test',
-            'password' => \Hash::make('456'),
+            'password' => Hash::make('456'),
         ]);
 
         $users = User::findOrFail(1);
         $this->assertEquals('james.judd@revisionable.test', $users->email);
-        $this->assertTrue(\Hash::check('456', $users->password));
+        $this->assertTrue(Hash::check('456', $users->password));
     }
 
     /**
@@ -63,7 +64,7 @@ class RevisionTest extends \Orchestra\Testbench\TestCase
         $user = User::create([
             'name' => 'James Judd',
             'email' => 'james.judd@revisionable.test',
-            'password' => \Hash::make('456'),
+            'password' => Hash::make('456'),
         ]);
 
         // change to my nickname

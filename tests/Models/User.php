@@ -1,16 +1,16 @@
 <?php
 
-namespace Venturecraft\Revisionable\Tests\Models;
+namespace AegirLeet\Revisionable\Tests\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use Venturecraft\Revisionable\RevisionableTrait;
+use AegirLeet\Revisionable\RevisionableTrait;
 
 /**
  * Add a revisionable model for testing purposes
  * I've chosen User, purely because the migration will already exist
  *
  * Class User
- * @package Venturecraft\Revisionable\Tests\Models
+ * @package AegirLeet\Revisionable\Tests\Models
  */
 class User extends Model
 {
